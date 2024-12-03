@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Ethan P.",
+    "similarStudent": "Chris R.",
+    "academicInterests": "Physics, Mathematics",
+    "collegeTargets": "MIT, UC Berkeley, Carnegie Mellon",
+    "profileImage": "boy1.png",
+    "seekingHelpOn": "SAT preparation, College essay writing, Course planning",
+    "wantAMentorWhoIs": "Patient, Inspiring, Knowledgeable"
+  },
+  {
+    "id": 2,
+    "name": "Sophia T.",
+    "similarStudent": "Emma W.",
+    "academicInterests": "English, Creative Writing",
+    "collegeTargets": "Harvard, Yale, Columbia",
+    "profileImage": "girl1.png",
+    "seekingHelpOn": "Essay brainstorming, Interview preparation, Choosing schools",
+    "wantAMentorWhoIs": "Encouraging, Detail-oriented, Thoughtful"
+  },
+  {
+    "id": 3,
+    "name": "Liam C.",
+    "similarStudent": "Noah G.",
+    "academicInterests": "Economics, Political Science",
+    "collegeTargets": "University of Chicago, Stanford, Georgetown",
+    "profileImage": "boy2.png",
+    "seekingHelpOn": "Crafting a personal narrative, Scholarship applications, Career exploration",
+    "wantAMentorWhoIs": "Empathetic, Motivational, Organized"
+  },
+  {
+    "id": 4,
+    "name": "Ava L.",
+    "similarStudent": "Isabella M.",
+    "academicInterests": "Biology, Environmental Science",
+    "collegeTargets": "Duke, UCLA, UC Davis",
+    "profileImage": "girl2.png",
+    "seekingHelpOn": "Extracurriculars, Volunteer opportunities, Resume building",
+    "wantAMentorWhoIs": "Friendly, Supportive, Visionary"
+  },
+  {
+    "id": 5,
+    "name": "James H.",
+    "similarStudent": "William J.",
+    "academicInterests": "Mechanical Engineering, Robotics",
+    "collegeTargets": "Caltech, Georgia Tech, Michigan",
+    "profileImage": "boy1.png",
+    "seekingHelpOn": "Portfolio creation, Recommendation letters, Summer internships",
+    "wantAMentorWhoIs": "Innovative, Encouraging, Analytical"
+  },
+  {
+    "id": 6,
+    "name": "Mia R.",
+    "similarStudent": "Olivia S.",
+    "academicInterests": "Psychology, Education",
+    "collegeTargets": "Brown, Johns Hopkins, Northwestern",
+    "profileImage": "girl1.png",
+    "seekingHelpOn": "Internship selection, Career pathways, College essay review",
+    "wantAMentorWhoIs": "Kind, Experienced, Visionary"
+  }
+]
