@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { SafeAreaView, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function LoginInfo({ onBack, onLogin }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity style={styles.backButtonContainer} onPress={onBack}>
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
@@ -16,7 +16,7 @@ export default function LoginInfo({ onBack, onLogin }) {
       <TouchableOpacity style={styles.submitButton} onPress={onLogin}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
+    marginTop: 10,
   },
   backButtonContainer: {
     position: "absolute",
@@ -38,11 +39,11 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "#000",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
     marginBottom: 20,
     marginTop: 60,
   },
@@ -53,26 +54,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 15,
+    fontFamily: "Outfit",
   },
   forgotPasswordText: {
     fontSize: 14,
     color: "#345DA7",
     textDecorationLine: "underline",
     marginBottom: 20,
-    alignSelf: "flex-end",
-    marginRight: "10%",
+    // alignSelf: "center",
+    // marginRight: "10%",
+    fontFamily: "Outfit",
   },
   submitButton: {
     backgroundColor: "#345DA7",
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 40,
     borderRadius: 5,
-    width: "80%",
+    // width: "80%",
     alignItems: "center",
     marginTop: 20,
   },
   submitButtonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    fontFamily: "Outfit",
   },
 });

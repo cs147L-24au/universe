@@ -9,47 +9,51 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
-import Profile from "./insightProfile";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const names = [
-  { name: "Sarah W." },
-  { name: "John L." },
-  { name: "Liam O." },
-  { name: "Jack P." },
-  { name: "Gill S." },
-  { name: "Samuel L." },
-  { name: "Doug T." },
-  { name: "Jude P." },
+  // { name: "Sarah W.", isNew: true },
+  { name: "John L.", isNew: true },
+  { name: "Liam O.", isNew: true },
+  { name: "Sarah W.", isNew: false },
+  { name: "Jack P.", isNew: false },
+  { name: "Gill S.", isNew: false },
+  { name: "Samuel L.", isNew: false },
+  { name: "Doug T.", isNew: false },
+  { name: "Jude P.", isNew: false },
 ];
 
-const InsightCard = ({ name, onPress }) => (
+const InsightCard = ({ name, onPress, isNew }) => (
   <TouchableOpacity style={styles.card} onPress={() => onPress(name)}>
     <Image
-      source={require("../../../assets/images/avatar.png")} // Replace with actual avatar image
+      source={require("../../../assets/images/boy1.png")} // Replace with actual avatar image
       style={styles.avatar}
     />
     <Text style={styles.cardName}>{name}</Text>
     <Text style={styles.cardDetails}>In: Extracurricular Activities</Text>
+    {isNew && (
+      <View style={styles.newBadge}>
+        <Text style={styles.newText}>NEW</Text>
+      </View>
+    )}
   </TouchableOpacity>
 );
 
 export default function Insights() {
   const router = useRouter();
-  const [selectedName, setSelectedName] = useState(null); // State for selected name
   const [searchQuery, setSearchQuery] = useState(""); // Search query
 
   const handlePress = (name) => {
-    // Navigate to the profile page with the name parameter
-    // console.log("Navigating to profile with name:", name);
     router.push({
       pathname: "insights/insightProfile",
-      params: { name }, // Pass the name parameter
+      params: { name },
     });
   };
 
-  const handleCloseProfile = () => {
-    setSelectedName(null);
+  const handleChatPress = () => {
+    router.push("insights/chats");
   };
 
   const filteredNames = names.filter((item) =>
@@ -58,47 +62,44 @@ export default function Insights() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {!selectedName ? (
-        <>
-          {/* Header */}
-          <Text style={styles.headerText}>Students</Text>
-
-          {/* Search Bar */}
+      <View style={styles.header}>
+        <View style={styles.searchContainer}>
           <TextInput
-            style={styles.searchBar}
-            placeholder="Search Student"
+            style={styles.searchInput}
+            placeholder="Search student"
             placeholderTextColor="#888"
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
           />
-
-          {/* Recent and Layout Options */}
-          <View style={styles.topRow}>
-            <Text style={styles.recentText}>Recent</Text>
-            <View style={styles.iconContainer}>
-              <TouchableOpacity>
-                <Text style={styles.icon}>≡</Text> {/* List View Icon */}
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.icon}>▢</Text> {/* Grid View Icon */}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Grid of Insights */}
-          <FlatList
-            data={filteredNames}
-            keyExtractor={(item) => item.name}
-            numColumns={2} // Display two cards per row
-            renderItem={({ item }) => (
-              <InsightCard name={item.name} onPress={handlePress} />
-            )}
-            contentContainerStyle={styles.grid}
+          <Icon
+            name="search"
+            size={24}
+            color="#999"
+            style={styles.searchIcon}
           />
-        </>
-      ) : (
-        <Profile name={selectedName} onClose={handleCloseProfile} />
-      )}
+        </View>
+
+        <TouchableOpacity
+          onPress={handleChatPress}
+          style={styles.chatIconContainer}
+        >
+          <FontAwesome name="comment" size={30} color={"#304674"} />
+        </TouchableOpacity>
+      </View>
+
+      <FlatList
+        data={filteredNames}
+        keyExtractor={(item) => item.name}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <InsightCard
+            name={item.name}
+            onPress={handlePress}
+            isNew={item.isNew}
+          />
+        )}
+        contentContainerStyle={styles.grid}
+      />
     </SafeAreaView>
   );
 }
@@ -108,68 +109,68 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
   },
-  container: {
-    flex: 1,
-    padding: 20,
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     backgroundColor: "#FFF",
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
-    textAlign: "center",
-    color: "black",
-    fontFamily: "Outfit-Bold",
-    // fontWeight: '700',
+    // borderWidth: 1,
+    // borderColor: "red",
   },
   searchBar: {
+    flex: 1,
     backgroundColor: "#F0F0F5",
     borderRadius: 10,
     padding: 10,
     fontSize: 16,
-    marginBottom: 20,
+    marginRight: 10,
     borderWidth: 1,
     borderColor: "#E4E4E7",
-    marginHorizontal: 20,
+    fontFamily: "Outfit",
   },
-  topRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  chatIconContainer: {
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
-    paddingHorizontal: 20,
-  },
-  recentText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "black",
-  },
-  iconContainer: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  icon: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#888",
-    marginLeft: 10,
   },
   grid: {
     flexGrow: 1,
     justifyContent: "flex-start",
+    paddingBottom: 80,
   },
   card: {
     flex: 1,
     backgroundColor: "#DBDFEA",
     borderRadius: 10,
     padding: 15,
-    marginHorizontal: 15, // Horizontal margin for consistent spacing
-    marginVertical: 15, // Vertical margin for consistent spacing
+    marginHorizontal: 15,
+    marginVertical: 15,
     alignItems: "center",
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F0F0F5",
+    width: "85%",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#E4E4E7",
+    marginTop: 8,
+    marginRight: 15,
+    marginLeft: 8,
+    paddingHorizontal: 12,
+  },
+  searchInput: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 4,
+    fontSize: 16,
+    fontFamily: "Outfit",
   },
   avatar: {
     width: 60,
@@ -182,10 +183,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
     marginBottom: 5,
+    fontFamily: "Outfit-Bold",
   },
   cardDetails: {
     fontSize: 14,
     color: "#555",
     textAlign: "center",
+    fontFamily: "Outfit",
+  },
+  newBadge: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "#EB4D3D",
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  newText: {
+    color: "white",
+    fontSize: 10,
+    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
   },
 });

@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import React, { useState } from "react";
 import { Platform, View, Text, Button, StyleSheet } from "react-native";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import LoginScreen from "../login";
 import LoginInfo from "../login_info";
@@ -53,6 +54,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
+        tabBarActiveTintColor: "#304674", // Active tab icon color
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
@@ -60,6 +62,10 @@ export default function TabLayout() {
           },
           default: {},
         }),
+        tabBarLabelStyle: {
+          fontFamily: "Outfit-SemiBold", // Replace with your desired font family
+          fontSize: 12, // Optional: Customize font size
+        },
       }}
     >
       <Tabs.Screen
@@ -67,8 +73,9 @@ export default function TabLayout() {
         options={{
           title: "Find",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          unmountOnBlur: true,
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome size={size} name="search" color={color} />
           ),
         }}
       />
@@ -76,8 +83,8 @@ export default function TabLayout() {
         name="classes"
         options={{
           title: "Classes",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome size={size} name="book" color={color} />
           ),
         }}
       />
@@ -86,8 +93,9 @@ export default function TabLayout() {
         options={{
           title: "Students",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          unmountOnBlur: true,
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome size={size} name="group" color={color} />
           ),
         }}
       />
@@ -95,8 +103,8 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome size={size} name="user" color={color} />
           ),
         }}
       />

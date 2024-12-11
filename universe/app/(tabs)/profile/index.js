@@ -6,23 +6,18 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import ProfileCard from "../../components/profileCard";
+import ProfileCard from "../../../components/profileCard";
 
 import { ScrollView } from 'react-native';
 
-export default function TabTwoScreen() {
+export default function Profile() {
   return (
-    <ThemedView style={styles.container}>
-    <ThemedView style={styles.topBanner}>
-    <ThemedText style={styles.bannerText}>Profile</ThemedText>
-    <IconSymbol name="ellipsis-horizontal" style={styles.bannerIcon} />
-    </ThemedView>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <ProfileCard />
       <ThemedText style={styles.largeText}>Hours Mentored This Week</ThemedText>
-      <ThemedText style={styles.smallText}>April 1 - April 7th</ThemedText>
+      <ThemedText style={styles.smallText}>April 1st - April 7th</ThemedText>
       <Image
-        source={require('../../assets/images/largeImage.png')}
+        source={require('../../../assets/images/largeImage.png')}
         style={styles.largeImage}
       />
       <ThemedView style={styles.divider} />
@@ -33,89 +28,92 @@ export default function TabTwoScreen() {
         <ThemedView style={styles.card}><ThemedText style={styles.cardText}>Top rated Counselor</ThemedText></ThemedView>
       </ThemedView>
     </ScrollView>
-    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   topBanner: {
-    width: '100%',
+    width: "100%",
     height: 60,
-    backgroundColor: '#f4f4f4',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#f4f4f4",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   bannerText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'black'
+    textAlign: "center",
+    fontFamily: "Outfit-Bold",
+    color: "black",
   },
   bannerIcon: {
-    position: 'absolute',
+    position: "absolute",
     right: 16,
     fontSize: 24,
-    color: '#888',
+    color: "#888",
   },
   divider: {
-    width: '100%',
+    width: "100%",
     height: 1,
-    backgroundColor: '#ccc',
+    backgroundColor: "#ccc",
     marginVertical: 20,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
+    fontFamily: "Outfit-Bold",
+    color: "black",
     marginBottom: 15,
   },
   cardContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
     marginTop: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   card: {
-    backgroundColor: '#f8d7da',
+    backgroundColor: "#f8d7da",
     padding: 10,
     borderRadius: 8,
     flex: 1,
     marginHorizontal: 5,
-    
   },
   cardText: {
     fontSize: 14,
-    textAlign: 'center',
-    color: 'red'
+    fontFamily: "Outfit-SemiBold",
+    textAlign: "center",
+    color: "red",
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   scrollContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 16,
-    alignItems: 'center',
+    backgroundColor: "#FFF",
+    paddingBottom: 100,
   },
   largeText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 20,
+    fontFamily: "Outfit-Bold",
+    color: "black",
     marginTop: 20,
   },
   smallText: {
     fontSize: 14,
-    color: '#555',
+    color: "#555",
+    fontFamily: "Outfit",
     marginTop: 5,
     marginBottom: 20,
   },
   largeImage: {
-    width: '100%',
-    aspectRatio: 1156 / 634,
-    resizeMode: 'contain',
+    width: "100%", // Image spans the full width of the parent container
+    height: undefined, // Let aspectRatio control the height
+    aspectRatio: 1156 / 634, // Preserve the original aspect ratio
+    resizeMode: "contain",
+    flexShrink: 0, // Prevent the image from shrinking unexpectedly
   },
 });

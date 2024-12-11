@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Outfit-bold",
   },
   backButton: {
     position: "absolute", // Position it absolutely in the container
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 16, // Reasonable font size
     fontWeight: "500", // Medium font weight
     marginLeft: 5, // Add a little space between the arrow and the text
+    fontFamily: "Outfit",
   },
   backArrow: {
     fontSize: 18, // Slightly larger arrow

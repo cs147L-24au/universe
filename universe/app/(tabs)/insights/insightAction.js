@@ -55,5 +55,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#345DA7",
     fontWeight: "bold",
+    fontFamily: "Outfit",
   },
 });

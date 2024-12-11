@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "#000",
     fontSize: 16,
-    fontWeight: "bold",
-  },
+    fontFamily: "Outfit-Bold",
+  }, 
   title: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
     marginBottom: 20,
     marginTop: 60,
   },

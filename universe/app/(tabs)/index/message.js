@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -11,50 +11,33 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useGlobalSearchParams } from "expo-router";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 import StudentCardDetailed from "../../../components/StudentCard"; // Adjust path if necessary
-import STUDENT_DATA from "../../data/StudentData.json"; // Adjust path if necessary
-import { useRouter } from "expo-router";
+import { StudentContext } from "../../StudentContext"; // Import StudentContext
 
 export default function MessageScreen() {
   const router = useRouter();
-
   const { id } = useGlobalSearchParams(); // Retrieve the student ID from query params
-  const student = STUDENT_DATA.find((item) => item.id.toString() === id);
-
-  console.log("Student ID from params:", id); // Debug ID
-  console.log("Student found:", student); // Debug the student object
-
-  if (!student) {
-    console.warn("No student found for the given ID:", id);
-  }
+  const { students, markStudentAsMessaged } = useContext(StudentContext); // Use context
+  const student = students.find((item) => item.id.toString() === id);
 
   const [message, setMessage] = useState("");
 
-  // Dismiss keyboard on return or outside touch
+  const handleSendMessage = () => {
+    markStudentAsMessaged(student.id); // Mark student as messaged
+    router.push(`/success?id=${student.id}`);
+  };
+
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-
-  // Reset navigation stack when switching tabs or navigating back to "find/index"
-  useEffect(() => {
-    const unsubscribe = router.events?.addListener("focus", (event) => {
-      if (event?.routeName === "find") {
-        router.replace("/find/index"); // Reset stack to ensure clean navigation
-      }
-    });
-
-    return () => {
-      unsubscribe?.(); // Cleanup listener when component unmounts
-    };
-  }, [router]);
 
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={dismissKeyboard}>
         <ScrollView
           contentContainerStyle={styles.container}
           keyboardShouldPersistTaps="handled"
@@ -63,26 +46,17 @@ export default function MessageScreen() {
           <Text style={styles.messageLabel}>Your Message:</Text>
           <TextInput
             style={styles.input}
-            placeholder={`Introduce yourself, your student's potential classmates and class structure!`}
+            placeholder="Introduce yourself..."
             placeholderTextColor="#AAA"
+            fontFamily="Outfit"
             multiline={true}
             value={message}
             onChangeText={setMessage}
             returnKeyType="done"
             onSubmitEditing={dismissKeyboard}
-            textAlignVertical="top" // Start text at the top of the input box
+            textAlignVertical="top"
           />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              try {
-                // router.push("/find/success"); // Ensure the route matches your structure
-                router.push(`/find/success?id=${student.id}`);
-              } catch (error) {
-                console.error("Navigation Error:", error);
-              }
-            }}
-          >
+          <TouchableOpacity style={styles.button} onPress={handleSendMessage}>
             <Text style={styles.buttonText}>Send</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -115,7 +89,7 @@ const styles = StyleSheet.create({
     color: "#000",
     textAlignVertical: "top",
     width: "100%",
-    height: 150, // Fixed height for the input box
+    height: 150,
     marginBottom: 20,
   },
   button: {
@@ -125,7 +99,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     marginTop: 20,
-    // alignSelf: "stretch",
   },
   buttonText: {
     color: "#FFFFFF",

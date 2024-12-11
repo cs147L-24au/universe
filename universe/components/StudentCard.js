@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   studentName: {
     fontSize: 22,
-    fontWeight: "bold",
-    fontFamily: "Outfit",
+    // fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
     color: "#333",
   },
   similarContainer: {
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: "bold",
-    fontFamily: "Outfit",
+    // fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
     color: "#000",
   },
 });

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 
-
 const VAL = `
 Hi Sarah, I think it would be really helpful if you do some extracurriculars.  
 
@@ -19,8 +18,6 @@ Joining the debate team is a great option because it can help with your public s
 
 Let’s schedule a meeting to discuss more about this! 
 `;
-
-
 
 export default function PopupScreen() {
   const router = useRouter();
@@ -45,16 +42,17 @@ export default function PopupScreen() {
       <View style={styles.popup}>
         <View style={styles.avatarContainer}>
           <Image
-            source={require("../../../assets/images/avatar.png")} // Replace with student avatar
+            source={require("../../../assets/images/boy1.png")} // Replace with student avatar
             style={styles.avatar}
           />
         </View>
         <View style={styles.textBox}>
-          <TextInput style={styles.message}
-                      value={message}
-                      onChangeText={setMessage} 
-                      multiline/>
-    
+          <TextInput
+            style={styles.message}
+            value={message}
+            onChangeText={setMessage}
+            multiline
+          />
         </View>
         {/* Buttons */}
         <View style={styles.buttonRow}>
@@ -135,6 +133,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "bold",
+    fontFamily: "Outfit",
   },
   textBox: {
     borderWidth: 0.3,

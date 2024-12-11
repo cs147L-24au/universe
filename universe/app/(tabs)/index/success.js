@@ -22,7 +22,7 @@ export default function SuccessScreen() {
       </Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.replace(`/find?id=${student.id}`)} // Redirect back to "Find" screen
+        onPress={() => router.replace(`/`)} // Redirect back to "Find" screen
       >
         <Text style={styles.buttonText}>Find More Students</Text>
       </TouchableOpacity>

@@ -23,6 +23,7 @@ const insightDetails = {
 export default function InsightExplanation({ action }) {
   const details = insightDetails[action];
   const router = useRouter();
+
   if (!details) {
     return (
       <View style={styles.container}>
@@ -49,7 +50,7 @@ export default function InsightExplanation({ action }) {
     <View style={styles.container}>
       <View style={styles.pieContainer}>
         <Image
-          source={require("../assets/images/Pie.png")} // Replace with actual avatar image
+          source={require("../assets/images/newspider.png")} // Replace with actual avatar image
           style={styles.pie}
         />
       </View>
@@ -100,28 +101,33 @@ const styles = StyleSheet.create({
   },
   priority: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "#FFF",
     marginBottom: 5,
+    fontFamily: "Outfit-Bold",
   },
   action: {
     fontSize: 18,
     fontWeight: "normal",
     color: "#FFF",
     textAlign: "center",
+    fontFamily: "Outfit",
   },
   detailsSection: {
     backgroundColor: "#DBDFEA",
     borderRadius: 15,
     padding: 20,
     marginBottom: 30,
+    flexDirection: "column",
+    alignItems: "center",
   },
   detailsHeader: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "#2C2C54",
     marginBottom: 10,
     textAlign: "center",
+    fontFamily: "Outfit-Bold",
   },
   detailsText: {
     fontSize: 16,
@@ -129,27 +135,33 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 15, // Space between paragraphs
     textAlign: "justify", // Optional: Justify text for better paragraph alignment
+    fontFamily: "Outfit",
   },
   recommendedButton: {
     backgroundColor: "#304674",
-    borderRadius: 25,
+    borderRadius: 15,
     paddingVertical: 15,
+    paddingHorizontal: 20,
     alignItems: "center",
     marginTop: 20,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+    // borderWidth: 1,
+    // borderColor: 'red',
+    // width: 300,
   },
   recommendedText: {
     color: "#FFF",
     fontWeight: "bold",
     fontSize: 16,
+    fontFamily: "Outfit",
   },
   pie: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 200,
+    height: 200,
+    // borderRadius: 100,
     marginBottom: 30,
   },
   pieContainer: {
