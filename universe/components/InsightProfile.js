@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { useRouter } from "expo-router";
 
 const studentDetails = {
@@ -178,8 +185,24 @@ const priorityColors = {
 };
 
 export default function StudentProfile({ name }) {
+  const [loading, setLoading] = useState(true);
   const details = studentDetails[name] || {};
   const router = useRouter();
+
+  useEffect(() => {
+    // Simulate a network request or data processing delay
+    const timer = setTimeout(() => setLoading(false), 1000); // 1 second delay
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#345DA7" />
+        <Text style={styles.loadingText}>Loading profile...</Text>
+      </View>
+    );
+  }
 
   if (!name) {
     return (

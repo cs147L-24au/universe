@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { useRouter } from "expo-router";
 
 const insightDetails = {
@@ -21,8 +28,29 @@ const insightDetails = {
 };
 
 export default function InsightExplanation({ action }) {
+  const [loading, setLoading] = useState(true);
   const details = insightDetails[action];
   const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000); // Simulate delay
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Persist loading state across navigation
+  useEffect(() => {
+    if (action) {
+      setLoading(false);
+    }
+  }, [action]);
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#345DA7" />
+        <Text style={styles.loadingText}>Loading explanation...</Text>
+      </View>
+    );
+  }
 
   if (!details) {
     return (
@@ -35,14 +63,13 @@ export default function InsightExplanation({ action }) {
     );
   }
 
-  const handleActionPress = (insight) => {
-    // console.log("Navigating to insightDetail with:", insight); // Debug the data
+  const handleActionPress = () => {
     router.push({
       pathname: "/insights/insightAction", // Adjust the path
-      //   params: {
-      //     priority: insight.priority,
-      //     action: insight.action,
-      //   },
+      params: {
+        action, // Pass the current insight action as a parameter
+        priority: details.priority, // Pass the priority as well
+      },
     });
   };
 

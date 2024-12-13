@@ -1,30 +1,68 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
 import { useRouter } from "expo-router";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const API_KEY = "AIzaSyC4rq1wonPMu4D1NxRIFG6U1D__JFbuklM"; // Replace with your actual API key
 
 export default function InsightAction({ priority, action, recommendation }) {
   const router = useRouter();
-  const handleSendPress = (insight) => {
-    // console.log("Navigating to insightDetail with:", insight); // Debug the data
+  const [currentRecommendation, setCurrentRecommendation] =
+    useState(recommendation);
+  const [loading, setLoading] = useState(false);
+
+  const handleSendPress = () => {
     router.push({
-      pathname: "/insights/insightSend", // Adjust the path
-      //   params: {
-      //     priority: insight.priority,
-      //     action: insight.action,
-      //   },
+      pathname: "/insights/insightSend",
     });
   };
+
+  const fetchNextRecommendation = async () => {
+    setLoading(true); // Start loading
+    try {
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const chat = model.startChat();
+
+      const prompt = `Generate a detailed college application recommendation for improving "${action}". 
+      Provide a title for the recommendation, the title should just be the action itself, and then the details explaining the recommendation. 
+      Keep the response within 50 words. I want the recommended action to be something really specific 
+      and concrete. Make sure the action recommended is relevant to "${action}".`;
+
+      const result = await chat.sendMessage(prompt);
+      const response = result.response;
+
+      console.log("API Response:", response.text());
+
+      if (response) {
+        const text = await response.text();
+        const parts = text.split("\n").filter((line) => line.trim());
+        const title = parts[0]?.trim() || "No title available";
+        const details =
+          parts.slice(1).join("\n").trim() || "No details available";
+
+        setCurrentRecommendation({ title, details }); // Update with new recommendation
+      }
+    } catch (err) {
+      console.error("Error fetching next recommendation:", err);
+      Alert.alert(
+        "Error",
+        "Failed to fetch a new recommendation. Please try again."
+      );
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
   return (
     <View style={styles.container}>
-      {/* Back Button
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => console.log("Go Back")}
-      >
-        <Text style={styles.backArrow}>←</Text>
-        <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity> */}
-
       {/* Priority and Action Header */}
       <View style={styles.priorityCard}>
         <Text style={styles.priority}>{priority}</Text>
@@ -34,20 +72,30 @@ export default function InsightAction({ priority, action, recommendation }) {
       {/* Recommended Actions */}
       <Text style={styles.recommendationHeader}>Recommended Actions</Text>
       <View style={styles.recommendationCard}>
-        <Text style={styles.recommendationTitle}>{recommendation.title}</Text>
-        <Text style={styles.recommendationText}>{recommendation.details}</Text>
+        <Text style={styles.recommendationTitle}>
+          {loading ? "Loading..." : currentRecommendation.title}
+        </Text>
+        <Text style={styles.recommendationText}>
+          {loading
+            ? "Please wait while we fetch the next action..."
+            : currentRecommendation.details}
+        </Text>
       </View>
 
       {/* Action Buttons */}
       <View style={styles.buttonRow}>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => handleSendPress()}
-        >
+        <TouchableOpacity style={styles.actionButton} onPress={handleSendPress}>
           <Text style={styles.buttonText}>Send to student</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.buttonText}>See next action</Text>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={fetchNextRecommendation}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="#FFF" />
+          ) : (
+            <Text style={styles.buttonText}>See next action</Text>
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -60,22 +108,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     padding: 20,
   },
-  backButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  backArrow: {
-    fontSize: 18,
-    color: "#345DA7",
-    marginRight: 5,
-  },
-  backText: {
-    fontSize: 16,
-    color: "#345DA7",
-    // fontWeight: "bold",
-    fontFamily: "Outfit",
-  },
   priorityCard: {
     backgroundColor: "#304674",
     borderRadius: 15,
@@ -86,7 +118,6 @@ const styles = StyleSheet.create({
   },
   priority: {
     fontSize: 18,
-    // fontWeight: "bold",
     color: "#FFF",
     marginBottom: 10,
     fontFamily: "Outfit-Bold",
@@ -107,23 +138,20 @@ const styles = StyleSheet.create({
     fontFamily: "Outfit-Bold",
   },
   recommendationCard: {
-    backgroundColor: "#DBDFEA", // Keep your provided color
-    borderRadius: 10, // Slightly rounded corners for a paper-like effect
+    backgroundColor: "#DBDFEA",
+    borderRadius: 10,
     padding: 20,
     marginBottom: 20,
-    shadowColor: "#000", // Black shadow for depth
-    shadowOpacity: 0.2, // Subtle shadow to lift the card
-    shadowRadius: 5, // Soft shadow
-    shadowOffset: { width: 3, height: 3 }, // Shadow slightly offset for natural look
-    elevation: 4, // Shadow effect for Android
-    borderWidth: 1, // Adds a subtle border
-    borderColor: "#C8C8D3", // Slightly darker shade for the border
-    // transform: [{ rotate: "-3deg" }], // Slight rotation for casual, sticky note effect
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: { width: 3, height: 3 },
+    elevation: 4,
+    borderWidth: 1,
+    borderColor: "#C8C8D3",
   },
-
   recommendationTitle: {
     fontSize: 16,
-    // fontWeight: "bold",
     fontFamily: "Outfit-Bold",
     color: "#2C2C54",
     marginBottom: 10,
@@ -143,18 +171,17 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     backgroundColor: "#304674",
-    borderRadius: 10, // Rounded corners
+    borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    shadowColor: "#000", // Shadow color (black)
-    shadowOffset: { width: 0, height: 2 }, // Offset the shadow (x, y)
-    shadowOpacity: 0.3, // Shadow opacity
-    shadowRadius: 2, // Shadow blur radius
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#FFF",
     fontSize: 14,
-    // fontWeight: "bold",
     fontFamily: "Outfit-Bold",
   },
 });
