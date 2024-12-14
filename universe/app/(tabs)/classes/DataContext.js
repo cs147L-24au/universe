@@ -20,18 +20,6 @@ export const DataProvider = ({ children }) => {
     );
   };
 
-  /*
-  const addLesson = ({ classID, newItem }) => {
-    setLessons((prevItems) => [newItem, ...prevItems]);
-  };
-
-  const deleteLesson = ({ classID, itemId }) => {
-    setLessons((prevItems) =>
-      prevItems.filter((classes) => lessons.classroomID.id !== itemId)
-    );
-  };
-  */
-
   const addLesson = (newItem) => {
     setLessons((prevItems) => [...prevItems, newItem]);
   };

@@ -16,7 +16,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
 import EditButton from "../../../../components/EditButton";
 
-// import LESSON_DATA from "../../../data/LessonData.json";
 import LessonItem from "../../../../components/LessonItem";
 import { useRouter } from "expo-router";
 import { useData } from "../DataContext";
@@ -29,20 +28,6 @@ export function LessonsScreen() {
   const navigation = useNavigation();
   const [editMode, setEditMode] = useState(false); // Track edit mode state
   const { classroomID, headerTitle } = useLocalSearchParams();
-  // const numClassID = Number(classroomID);
-
-  /*
-  const lessonData = LESSON_DATA.find(
-    (item) => item.id === Number(classroomID)
-  ).data;
-  const [data, setData] = useState(lessonData); // Manage the classroom data
-  */
-
-  /*
-  const handleDelete = (id) => {
-    setData((prevData) => prevData.filter((item) => item.numClassID.id !== id)); // Remove item by ID
-  };
-  */
 
   const showAlert = (id) => {
     Alert.alert(
@@ -72,13 +57,6 @@ export function LessonsScreen() {
     router.push({
       pathname: "classes/insideClass/specificLesson",
       params: { data: item },
-    });
-  };
-
-  const navigateToStudents = () => {
-    router.push({
-      pathname: "classes/insideClass/students",
-      params: { classroomID, headerTitle }, // Pass both classroomID and headerTitle
     });
   };
 

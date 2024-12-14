@@ -49,7 +49,6 @@ const ClassButton = ({ title, onPress, showDelete, onDelete }) => (
 const ClassesInterface = () => {
   const router = useRouter();
   const [editMode, setEditMode] = useState(false); // Track edit mode state
-  // const [data, setData] = useState(ClassroomData); // Manage the classroom data
   const navigation = useNavigation();
   const { classes, deleteClass } = useData();
 
@@ -67,12 +66,6 @@ const ClassesInterface = () => {
   const handleAddNew = () => {
     navigation.navigate("newClassModal");
   };
-
-  /*
-  const handleDelete = (id) => {
-    setData((prevData) => prevData.filter((item) => item.id !== id)); // Remove item by ID
-  };
-  */
 
   const showAlert = (id) => {
     Alert.alert(

@@ -25,25 +25,11 @@ export function StudentsScreen() {
   const [editMode, setEditMode] = useState(false); // Track edit mode state
   const { names, deleteName, addName } = useData();
   const { classroomID, headerTitle } = useLocalSearchParams();
-  // const [selectedName, setSelectedName] = useState(null); // State for selected name
   const [searchQuery, setSearchQuery] = useState(""); // Search query
-
-  {
-    /* Not sure if we should be able to navigate from this page to the individual students pages */
-  }
 
   const handleDelete = (id) => {
     setData((prevData) => prevData.filter((item) => item.name !== id));
     deleteName(id);
-    /*
-    const newData = {
-      id: Date.now().toString(),
-      name: id,
-      selected: false,
-      inClass: false,
-    };
-    addName(newData);
-    */
   };
 
   const showAlert = (name) => {
@@ -90,13 +76,6 @@ export function StudentsScreen() {
 
   const [data, setData] = useState(filteredNames);
 
-  const navigateToLessons = () => {
-    router.push({
-      pathname: "classes/insideClass/lessons",
-      params: { headerTitle, classroomID },
-    });
-  };
-
   const handleEditPress = () => {
     setEditMode((prev) => !prev); // Toggle edit mode
   };
@@ -125,7 +104,6 @@ export function StudentsScreen() {
       {/* Header */}
       {/* <Text style={styles.headerText}>Students</Text> */}
 
-      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -137,7 +115,6 @@ export function StudentsScreen() {
         <Icon name="search" size={24} color="#999" style={styles.searchIcon} />
       </View>
 
-      {/* Grid of Students */}
       <View style={styles.inner}>
         <FlatList
           data={names}
