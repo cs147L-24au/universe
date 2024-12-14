@@ -18,8 +18,8 @@ export default function LessonDetailScreen() {
   const navigation = useNavigation();
   const { currLesson } = useLocalSearchParams();
   // const { lessons } = useData();
-
   const dataFinal = JSON.parse(currLesson);
+  console.log("This is the new curr: ", dataFinal);
 
   useEffect(() => {
     navigation.setOptions({

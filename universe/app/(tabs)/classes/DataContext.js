@@ -10,6 +10,11 @@ export const DataProvider = ({ children }) => {
   const [names, setNames] = useState(CLASSROOM_STUDENT_DATA);
   const [lessons, setLessons] = useState(LESSON_DATA);
 
+  const addClass = (newItem, newLessonElement) => {
+    setClasses((prevItems) => [newItem, ...prevItems]);
+    setLessons((prevItems) => [...prevItems, newLessonElement]);
+  };
+
   const deleteClass = (itemId) => {
     setClasses((prevItems) =>
       prevItems.filter((classes) => classes.id !== itemId)
@@ -47,17 +52,6 @@ export const DataProvider = ({ children }) => {
     setNames((prevItems) => prevItems.filter((names) => names.name !== itemId));
   };
 
-  const addClass = (newItem) => {
-    setClasses((prevItems) => [newItem, ...prevItems]);
-    setLessons((prevItems) => [
-      ...prevItems,
-      {
-        id: Date.now().toString(),
-        allData: [],
-      },
-    ]);
-  };
-
   return (
     <DataContext.Provider
       value={{
@@ -68,6 +62,7 @@ export const DataProvider = ({ children }) => {
         addName,
         deleteName,
         lessons,
+        setLessons,
         addLesson,
         deleteLesson,
       }}

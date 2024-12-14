@@ -39,7 +39,7 @@ const NewLesson = () => {
       description: title,
       zoomLink: zoom,
       date: date,
-      agenda: agenda,
+      agenda: [agenda],
     };
     addLesson(Number(classroomID), newData);
     router.back();
