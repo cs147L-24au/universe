@@ -10,8 +10,9 @@ export const DataProvider = ({ children }) => {
   const [names, setNames] = useState(CLASSROOM_STUDENT_DATA);
   const [lessons, setLessons] = useState(LESSON_DATA);
 
-  const addClass = (newItem) => {
+  const addClass = (newItem, newLessonElement) => {
     setClasses((prevItems) => [newItem, ...prevItems]);
+    setLessons((prevItems) => [...prevItems, newLessonElement]);
   };
 
   const deleteClass = (itemId) => {
@@ -20,13 +21,26 @@ export const DataProvider = ({ children }) => {
     );
   };
 
-  const addLesson = (newItem) => {
-    setLessons((prevItems) => [...prevItems, newItem]);
+  const addLesson = (outerId, newItem) => {
+    setLessons((prevItems) =>
+      prevItems.map((item) =>
+        item.id === outerId
+          ? { ...item, allData: [...item.allData, newItem] }
+          : item
+      )
+    );
   };
 
-  const deleteLesson = (itemId) => {
+  const deleteLesson = (outerId, itemId) => {
     setLessons((prevItems) =>
-      prevItems.filter((lessons) => lessons.id !== itemId)
+      prevItems.map((item) =>
+        item.id === outerId
+          ? {
+              ...item,
+              allData: item.allData.filter((lesson) => lesson.id !== itemId),
+            }
+          : item
+      )
     );
   };
 
@@ -48,6 +62,7 @@ export const DataProvider = ({ children }) => {
         addName,
         deleteName,
         lessons,
+        setLessons,
         addLesson,
         deleteLesson,
       }}

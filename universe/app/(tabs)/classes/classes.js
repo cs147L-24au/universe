@@ -55,7 +55,7 @@ const ClassesInterface = () => {
   const handleClassPress = (item) => {
     router.push({
       pathname: "classes/insideClass/topNav",
-      params: { headerTitle: item.name, classroomID: item.dataID },
+      params: { headerTitle: item.name, classroomID: item.id },
     });
   };
 

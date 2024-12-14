@@ -24,7 +24,7 @@ const NewClass = () => {
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
   const navigation = useNavigation();
-  const { classes, addClass } = useData();
+  const { classes, addClass, setLessons } = useData();
   const router = useRouter();
 
   useEffect(() => {
@@ -48,12 +48,13 @@ const NewClass = () => {
   }, [navigation]);
 
   const handleSubmit = () => {
+    const newID = Date.now().toString();
     const newData = {
-      id: Date.now().toString(),
+      id: Number(newID),
       name: title,
-      dataID: 1,
     };
-    addClass(newData);
+    const newLessonElement = { id: Number(newID), allData: [] };
+    addClass(newData, newLessonElement);
     router.back();
   };
 

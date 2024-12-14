@@ -1,54 +1,151 @@
 [
   {
     "id": 1,
-    "name": "Lesson #1",
-    "description": "Extracurriculars That Are Most Unique!",
-    "zoomLink": "xxxx",
-    "date": "Fri, Nov 12",
-    "agenda": [
-      "Discussion on extracurriculars that are most unique!",
-      "How to find unique extracurricular activities",
-      "How to showcase uniqueness in applications"
-    ],
-    "occurred": true
+    "allData": [
+      {
+        "id": 1,
+        "name": "Lesson #1",
+        "description": "Extracurriculars That Are Most Unique!",
+        "zoomLink": "xxxx",
+        "date": "Fri, Nov 12",
+        "agenda": [
+          "Discussion on extracurriculars that are most unique!",
+          "How to find unique extracurricular activities",
+          "How to showcase uniqueness in applications"
+        ],
+        "occurred": true
+      },
+      {
+        "id": 2,
+        "name": "Lesson #2",
+        "description": "Stale and Overplayed: Avoid These Boring Activities!",
+        "zoomLink": "xxxx",
+        "date": "Wed, Nov 17",
+        "agenda": [
+          "Identifying overplayed extracurriculars",
+          "Tips to avoid common mistakes in activities",
+          "Innovative ideas to stand out with activities"
+        ],
+        "occurred": true
+      },
+      {
+        "id": 3,
+        "name": "Lesson #3",
+        "description": "Why You Should Try Art",
+        "zoomLink": "xxxx",
+        "date": "Mon, Nov 22",
+        "agenda": [
+          "Benefits of exploring art as an extracurricular",
+          "How art develops creativity and problem-solving",
+          "Steps to get started with art activities"
+        ],
+        "occurred": false
+      },
+      {
+        "id": 4,
+        "name": "Lesson #4",
+        "description": "How To Write Your Activities Descriptions",
+        "zoomLink": "xxxx",
+        "date": "Fri, Nov 26",
+        "agenda": [
+          "Crafting impactful activity descriptions",
+          "Storytelling techniques for writing descriptions",
+          "Best practices for concise and effective writing"
+        ],
+        "occurred": false
+      }
+    ]
   },
   {
     "id": 2,
-    "name": "Lesson #2",
-    "description": "Stale and Overplayed: Avoid These Boring Activities!",
-    "zoomLink": "xxxx",
-    "date": "Wed, Nov 17",
-    "agenda": [
-      "Identifying overplayed extracurriculars",
-      "Tips to avoid common mistakes in activities",
-      "Innovative ideas to stand out with activities"
-    ],
-    "occurred": true
+    "allData": [
+      {
+        "id": 1,
+        "name": "Lesson #1",
+        "description": "How to Apply to Scholarships",
+        "zoomLink": "xxxx",
+        "date": "Wed, Nov 17",
+        "agenda": [
+          "What are prestigious scholarships?",
+          "How to find unique cool scholarship opportunities",
+          "The best profile to have for merit-based scholarships"
+        ],
+        "occurred": true
+      },
+      {
+        "id": 2,
+        "name": "Lesson #2",
+        "description": "How to Calculate Financial Aid",
+        "zoomLink": "xxxx",
+        "date": "Tue, Dec 19",
+        "agenda": [
+          "Consider your own financial situation",
+          "Find need-based schools",
+          "What has been the financial aid history at the college?"
+        ],
+        "occurred": false
+      }
+    ]
   },
   {
     "id": 3,
-    "name": "Lesson #3",
-    "description": "Why You Should Try Art",
-    "zoomLink": "xxxx",
-    "date": "Mon, Nov 22",
-    "agenda": [
-      "Benefits of exploring art as an extracurricular",
-      "How art develops creativity and problem-solving",
-      "Steps to get started with art activities"
-    ],
-    "occurred": false
+    "allData": [
+      {
+        "id": 1,
+        "name": "Lesson #1",
+        "description": "How to Write Personal Essays",
+        "zoomLink": "xxxx",
+        "date": "Wed, Nov 17",
+        "agenda": [
+          "What do colleges look for in essays?",
+          "The best topics to write about",
+          "Is there such thing as a boring essay?"
+        ],
+        "occurred": true
+      },
+      {
+        "id": 2,
+        "name": "Lesson #2",
+        "description": "Describe yourself in Five Words, A Short But Hard Prompt",
+        "zoomLink": "xxxx",
+        "date": "Tue, Dec 19",
+        "agenda": [
+          "Asking your friends and family what they would describe you as",
+          "Being genuine"
+        ],
+        "occurred": false
+      },
+      {
+        "id": 3,
+        "name": "Lesson #3",
+        "description": "How to Write Supplemental Essays",
+        "zoomLink": "xxxx",
+        "date": "Wed, Dec 20",
+        "agenda": [
+          "What is the worst thing to write about",
+          "Don't be boring! Write about something other than your major",
+          "Ask your friends to read it",
+          "Tailor it to the specific school you're applying to"
+        ],
+        "occurred": false
+      }
+    ]
   },
   {
     "id": 4,
-    "name": "Lesson #4",
-    "description": "How To Write Your Activities Descriptions",
-    "zoomLink": "xxxx",
-    "date": "Fri, Nov 26",
-    "agenda": [
-      "Crafting impactful activity descriptions",
-      "Storytelling techniques for writing descriptions",
-      "Best practices for concise and effective writing"
-    ],
-    "occurred": false
+    "allData": [
+      {
+        "id": 1,
+        "name": "Lesson #1",
+        "description": "How to Find the Right School For Your Sport",
+        "zoomLink": "xxxx",
+        "date": "Fri, Dec 22",
+        "agenda": [
+          "Specific schools have specific athletic departments they prioritize",
+          "You need to show you can still be a good student, not just an athlete"
+        ],
+        "occurred": false
+      }
+    ]
   }
 ]

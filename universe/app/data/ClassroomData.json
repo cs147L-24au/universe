@@ -1,23 +1,19 @@
 [
   {
     "id": 1,
-    "name": "Extra-cirrucular Activities",
-    "dataID": 1
+    "name": "Extra-cirrucular Activities"
   },
   {
     "id": 2,
-    "name": "Financial Aid",
-    "dataID": 1
+    "name": "Financial Aid"
   },
   {
     "id": 3,
-    "name": "College Essays",
-    "dataID": 1
+    "name": "College Essays"
   },
   {
     "id": 4,
-    "name": "Recruiting for Sports",
-    "dataID": 1
+    "name": "Recruiting for Sports"
   },
   {
     "id": -1

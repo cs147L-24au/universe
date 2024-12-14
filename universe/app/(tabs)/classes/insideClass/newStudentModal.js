@@ -6,6 +6,7 @@ import { TextInput, Image, FlatList, SafeAreaView } from "react-native";
 import { useData } from "../DataContext";
 import { useRouter } from "expo-router"; // Use useRouter for navigation
 import Theme from "../../../../assets/theme";
+import { useLocalSearchParams } from "expo-router";
 
 export default function Modal() {
   const router = useRouter();
