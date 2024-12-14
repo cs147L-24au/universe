@@ -10,23 +10,32 @@ export const DataProvider = ({ children }) => {
   const [names, setNames] = useState(CLASSROOM_STUDENT_DATA);
   const [lessons, setLessons] = useState(LESSON_DATA);
 
-  const addClass = (newItem) => {
-    setClasses((prevItems) => [newItem, ...prevItems]);
-  };
-
   const deleteClass = (itemId) => {
     setClasses((prevItems) =>
       prevItems.filter((classes) => classes.id !== itemId)
     );
   };
 
-  const addLesson = (newItem) => {
-    setLessons((prevItems) => [...prevItems, newItem]);
+  const addLesson = (outerId, newItem) => {
+    setLessons((prevItems) =>
+      prevItems.map((item) =>
+        item.id === outerId
+          ? { ...item, allData: [...item.allData, newItem] }
+          : item
+      )
+    );
   };
 
-  const deleteLesson = (itemId) => {
+  const deleteLesson = (outerId, itemId) => {
     setLessons((prevItems) =>
-      prevItems.filter((lessons) => lessons.id !== itemId)
+      prevItems.map((item) =>
+        item.id === outerId
+          ? {
+              ...item,
+              allData: item.allData.filter((lesson) => lesson.id !== itemId),
+            }
+          : item
+      )
     );
   };
 
@@ -36,6 +45,17 @@ export const DataProvider = ({ children }) => {
 
   const deleteName = (itemId) => {
     setNames((prevItems) => prevItems.filter((names) => names.name !== itemId));
+  };
+
+  const addClass = (newItem) => {
+    setClasses((prevItems) => [newItem, ...prevItems]);
+    setLessons((prevItems) => [
+      ...prevItems,
+      {
+        id: Date.now().toString(),
+        allData: [],
+      },
+    ]);
   };
 
   return (

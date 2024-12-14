@@ -18,6 +18,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Theme from "../../../../assets/theme";
 import { useData } from "../DataContext";
 import { useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
 const NewLesson = () => {
   const [title, setTitle] = useState("");
@@ -27,19 +28,20 @@ const NewLesson = () => {
   const [agenda, setAgenda] = useState("");
   const [description, setDescription] = useState("");
   const navigation = useNavigation();
-  const { lessons, addLesson } = useData();
+  const { addLesson } = useData();
   const router = useRouter();
+  const { classroomID } = useLocalSearchParams();
 
   const handleSubmit = () => {
     const newData = {
       id: Date.now().toString(),
-      name: "Lesson #5",
+      name: "New Lesson",
       description: title,
       zoomLink: zoom,
       date: date,
       agenda: agenda,
     };
-    addLesson(newData);
+    addLesson(Number(classroomID), newData);
     router.back();
   };
 

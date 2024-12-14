@@ -11,13 +11,15 @@ import { useLocalSearchParams } from "expo-router";
 import ClassroomData from "../../../data/LessonData.json";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+// import { useData } from "../DataContext";
 
 export default function LessonDetailScreen() {
   const route = useRoute();
   const navigation = useNavigation();
+  const { currLesson } = useLocalSearchParams();
+  // const { lessons } = useData();
 
-  const dataFinal = ClassroomData[0];
-  console.log(dataFinal);
+  const dataFinal = JSON.parse(currLesson);
 
   useEffect(() => {
     navigation.setOptions({

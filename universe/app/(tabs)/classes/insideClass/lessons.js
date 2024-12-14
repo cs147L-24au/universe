@@ -28,6 +28,9 @@ export function LessonsScreen() {
   const navigation = useNavigation();
   const [editMode, setEditMode] = useState(false); // Track edit mode state
   const { classroomID, headerTitle } = useLocalSearchParams();
+  const currLessons = lessons.find(
+    (item) => item.id === Number(classroomID)
+  )?.allData;
 
   const showAlert = (id) => {
     Alert.alert(
@@ -41,7 +44,7 @@ export function LessonsScreen() {
         {
           text: "Delete",
           // onPress: () => handleDelete(id),
-          onPress: () => deleteLesson(id),
+          onPress: () => deleteLesson(Number(classroomID), id),
           style: "destructive", // iOS only - makes the button red
         },
       ],
@@ -56,7 +59,7 @@ export function LessonsScreen() {
   const handleLessonPress = (item) => {
     router.push({
       pathname: "classes/insideClass/specificLesson",
-      params: { data: item },
+      params: { currLesson: JSON.stringify(item) },
     });
   };
 
@@ -87,7 +90,10 @@ export function LessonsScreen() {
       {/* Create New Lesson Bar */}
       {editMode && (
         <Link
-          href="classes/insideClass/newLessonModal"
+          href={{
+            pathname: "classes/insideClass/newLessonModal",
+            params: { classroomID: Number(classroomID) },
+          }}
           style={styles.createContainer}
         >
           <View style={styles.createTextContainer}>
@@ -98,7 +104,7 @@ export function LessonsScreen() {
 
       {/* Lessons List */}
       <FlatList
-        data={lessons.slice().reverse()}
+        data={currLessons?.slice().reverse()}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         style={styles.list}
